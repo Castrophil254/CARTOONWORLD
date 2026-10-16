@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CartoonWorld - Watch Cartoons</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101426;
+      color: white;
+    }
+    header {
+      background: #191f3d;
+      padding: 20px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .logo { font-size: 27px; font-weight: bold; color: #ffcf40; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .hero {
+      padding: 65px 7%;
+      text-align: center;
+      background: linear-gradient(135deg, #4425a8, #087ca7);
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); margin: 0 0 12px; }
+    .hero p { font-size: 18px; }
+    .search {
+      width: min(100%, 450px);
+      padding: 14px;
+      border: 0;
+      border-radius: 25px;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+    main { padding: 30px 6%; }
+    h2 { color: #ffcf40; }
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+    .card {
+      background: #1c2340;
+      border-radius: 12px;
+      overflow: hidden;
+      padding-bottom: 15px;
+    }
+    .thumbnail {
+      height: 145px;
+      display: grid;
+      place-items: center;
+      font-size: 65px;
+      background: linear-gradient(135deg, #ff9a44, #ff4d82);
+    }
+    .card h3, .card p { margin: 12px 15px; }
+    .card p { color: #c8cde0; }
+    .watch {
+      display: inline-block;
+      margin: 0 15px;
+      background: #ffcf40;
+      color: #17182b;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .notice { color: #c8cde0; font-size: 14px; }
+    footer {
+      background: #191f3d;
+      padding: 25px;
+      text-align: center;
+      color: #c8cde0;
+    }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🎬 CartoonWorld</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#cartoons">Cartoons</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>Your Cartoon Adventure Starts Here!</h1>
+  <p>Discover fun animated videos and enjoy your next adventure.</p>
+  <input class="search" id="search" type="search"
+         placeholder="Search cartoons..." aria-label="Search cartoons">
+</section>
+
+<main>
+  <section id="cartoons">
+    <h2>🌟 Featured Cartoons</h2>
+    <div class="videos" id="videoList">
+
+      <article class="card" data-title="funny cartoon">
+        <div class="thumbnail">😂</div>
+        <h3>Funny Cartoon</h3>
+        <p>Enjoy a fun animation adventure.</p>
+        <a class="watch" href="https://www.youtube.com/"
+           target="_blank" rel="noopener">Watch Videos</a>
+      </article>
+
+      <article class="card" data-title="adventure cartoon">
+        <div class="thumbnail">🚀</div>
+        <h3>Adventure Cartoon</h3>
+        <p>Explore a world full of adventure.</p>
+        <a class="watch" href="https://www.youtube.com/"
+           target="_blank" rel="noopener">Watch Videos</a>
+      </article>
+
+      <article class="card" data-title="kids animation">
+        <div class="thumbnail">🦁</div>
+        <h3>Kids Animation</h3>
+        <p>Discover colorful animated stories.</p>
+        <a class="watch" href="https://www.youtube.com/"
+           target="_blank" rel="noopener">Watch Videos</a>
+      </article>
+
+    </div>
+    <p class="notice">These are sample cards. Replace the links with your own YouTube videos or videos you have permission to share.</p>
+    <p id="noResults" hidden>No cartoons found. Try another search.</p>
+  </section>
+
+  <section id="about">
+    <h2>About CartoonWorld</h2>
+    <p>CartoonWorld helps cartoon lovers discover animated entertainment in one place.</p>
+    <p class="notice">We feature original videos and content shared with permission.</p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 CartoonWorld. All rights reserved.</p>
+</footer>
+
+<script>
+  const search = document.getElementById("search");
+  const cards = document.querySelectorAll(".card");
+  const noResults = document.getElementById("noResults");
+
+  search.addEventListener("input", function () {
+    const term = search.value.toLowerCase().trim();
+    let count = 0;
+
+    cards.forEach(function (card) {
+      const matches = card.dataset.title.includes(term);
+      card.hidden = !matches;
+      if (matches) count++;
+    });
+
+    noResults.hidden = count !== 0;
+  });
+</script>
+
+</body>
+</html>
